@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  host: postgres
+
+development:
+  <<: *default
+  database: one_bit_flix_development
+  
+test:
+  <<: *default
+  database: one_bit_flix_test
+

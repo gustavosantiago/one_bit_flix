@@ -1,0 +1,31 @@
+version: '3.2'
+
+services:
+  postgres:
+    image: postgres:11.5-alpine
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - pg_volume:/var/lib/postgresql/data:cached
+
+  redis:
+    image: redis:5.0.5-alpine
+    container_name: redis
+    ports:
+      - 6379:6379
+
+  one_bit_flix:
+    build: .
+    container_name: one_bit_flix
+    volumes:
+      - .:/one_bit_flix
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+    tty: true
+
+volumes:
+  pg_volume:
+    external: true
